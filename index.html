@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleMarket - Mercado de Estilos HTML y CSS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <style id="app-style">
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #f43f5e;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --bg-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-primary: #334155;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+            background-color: var(--light);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* Retro-modern mix */
+        .retro-card {
+            border: 2px solid var(--dark);
+            border-radius: var(--border-radius);
+            box-shadow: 4px 4px 0 var(--dark);
+            transition: all 0.2s ease-in-out;
+            background: var(--card-bg);
+            overflow: hidden;
+        }
+
+        .retro-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--dark);
+        }
+
+        .style-preview {
+            height: 220px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .style-preview:hover {
+            transform: scale(1.03);
+        }
+
+        .header {
+            background: var(--bg-gradient);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 4px solid var(--dark);
+        }
+
+        .btn-custom {
+            background: var(--primary);
+            color: white;
+            border: 2px solid var(--dark);
+            border-radius: var(--border-radius);
+            padding: 0.6rem 1.5rem;
+            font-weight: 600;
+            box-shadow: 3px 3px 0 var(--dark);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .btn-custom:hover {
+            background: var(--primary-dark);
+            color: white;
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 var(--dark);
+        }
+
+        .btn-outline-custom {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: var(--border-radius);
+            padding: 0.6rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .btn-outline-custom:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: var(--primary);
+            color: white;
+            border-radius: var(--border-radius);
+        }
+
+        .nav-pills .nav-link {
+            color: var(--text-primary);
+            border-radius: var(--border-radius);
+            padding: 0.5rem 1.5rem;
+            margin-right: 0.5rem;
+            font-weight: 500;
+        }
+
+        .price-tag {
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 100px;
+            font-weight: bold;
+            display: inline-block;
+            font-size: 1.1rem;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .preview-controls {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 30px;
+            padding: 5px 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .preview-btn {
+            color: white;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .preview-btn:hover {
+            color: var(--primary);
+        }
+
+        .modal-content {
+            border-radius: var(--border-radius);
+            border: 2px solid var(--dark);
+            box-shadow: 6px 6px 0 var(--dark);
+        }
+
+        .testimonial {
+            padding: 2rem;
+            background: white;
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .testimonial:hover {
+            transform: translateY(-10px);
+        }
+
+        .testimonial::before {
+            content: """;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 5rem;
+            color: rgba(99, 102, 241, 0.1);
+            line-height: 1;
+            font-family: serif;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+
+        .style-card {
+            transition: all 0.3s ease;
+        }
+
+        .style-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .category-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--secondary);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid var(--primary);
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #livePreviewFrame {
+            width: 100%;
+            height: 500px;
+            border: 2px solid var(--dark);
+            border-radius: var(--border-radius);
+            box-shadow: 4px 4px 0 var(--dark);
+        }
+
+        .custom-shape-divider-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .custom-shape-divider-bottom svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 50px;
+        }
+
+        .custom-shape-divider-bottom .shape-fill {
+            fill: var(--light);
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                text-align: center;
+                padding: 1.5rem 0;
+            }
+            .style-preview {
+                height: 180px;
+            }
+            .nav-pills .nav-link {
+                padding: 0.3rem 0.8rem;
+                margin-right: 0.3rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="javascript:void(0)">
+                <i class="fas fa-code text-primary me-2"></i>
+                <span class="fw-bold">StyleMarket</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#styles">Estilos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#categories">Categorías</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">Cómo funciona</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimonios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contacto</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-custom" href="javascript:void(0)">
+                            <i class="fas fa-shopping-cart me-1"></i> Carrito (0)
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header section -->
+    <header class="header position-relative">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 animate__animated animate__fadeIn">
+                    <h1 class="display-4 fw-bold mb-3">Soluciones de diseño web listas para usar</h1>
+                    <p class="lead mb-4">Encuentra, prueba y compra diseños HTML y CSS que harán destacar tu proyecto web. Ahorra tiempo y sorprende a tus clientes.</p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="#styles" class="btn btn-custom btn-lg">
+                            <i class="fas fa-palette me-2"></i>Explorar estilos
+                        </a>
+                        <a href="#how-it-works" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-info-circle me-2"></i>Cómo funciona
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block">
+                    <div class="retro-card p-3 mt-4 animate__animated animate__fadeInRight">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="bg-white rounded p-3" style="height: 100px;"></div>
+                            </div>
+                            <div class="col-6">
+                                <div class="bg-white rounded p-3" style="height: 100px;"></div>
+                            </div>
+                            <div class="col-12">
+                                <div class="bg-white rounded p-3" style="height: 150px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="custom-shape-divider-bottom">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </header>
+
+    <!-- Featured styles section -->
+    <section id="styles" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="h1 fw-bold mb-3">Nuestros estilos destacados</h2>
+                <p class="lead text-muted mx-auto" style="max-width: 700px;">Explora nuestra colección de diseños HTML y CSS creados por expertos. Todos nuestros estilos son responsivos, modernos y fáciles de personalizar.</p>
+            </div>
+
+            <ul class="nav nav-pills justify-content-center mb-5" id="stylesTab" role="tablist" data-aos="fade-up">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="all-tab" data-bs-toggle="pill" data-bs-target="#all" type="button" role="tab">Todos</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="landing-tab" data-bs-toggle="pill" data-bs-target="#landing" type="button" role="tab">Landing Pages</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="ecommerce-tab" data-bs-toggle="pill" data-bs-target="#ecommerce" type="button" role="tab">E-commerce</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="components-tab" data-bs-toggle="pill" data-bs-target="#components" type="button" role="tab">Componentes</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="animations-tab" data-bs-toggle="pill" data-bs-target="#animations" type="button" role="tab">Animaciones</button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="stylesTabContent">
+                <div class="tab-pane fade show active" id="all" role="tabpanel">
+                    <div class="row g-4">
+                        <!-- Style card 1 -->
+                        <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                            <div class="style-card retro-card h-100">
+                                <div class="position-relative">
+                                    <div class="style-preview bg-primary p-3">
+                                        <div class="category-badge">Landing Page</div>
+                                        <div class="preview-controls">
+                                            <button class="preview-btn" data-bs-toggle="modal" data-bs-target="#previewModal" data-style-id="1">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="preview-btn">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h4 class="mb-0">Moderna Pro</h4>
+                                        <span class="price-tag">$49</span>
+                                    </div>
+                                    <p class="text-muted mb-3">Landing page moderna con diseño minimalista para startups y profesionales.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <span class="badge bg-light text-dark me-1">HTML5</span>
+                                            <span class="badge bg-light text-dark me-1">CSS3</span>
+                                            <span class="badge bg-light text-dark">Responsive</span>
+                                        </div>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-custom">
+                                            <i class="fas fa-cart-plus me-1"></i> Comprar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Style card 2 -->
+                        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="style-card retro-card h-100">
+                                <div class="position-relative">
+                                    <div class="style-preview bg-secondary p-3">
+                                        <div class="category-badge">E-commerce</div>
+                                        <div class="preview-controls">
+                                            <button class="preview-btn" data-bs-toggle="modal" data-bs-target="#previewModal" data-style-id="2">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="preview-btn">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h4 class="mb-0">ShopStyle</h4>
+                                        <span class="price-tag">$79</span>
+                                    </div>
+                                    <p class="text-muted mb-3">Plantilla completa para tiendas online con UI moderna y optimizada para conversiones.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <span class="badge bg-light text-dark me-1">HTML5</span>
+                                            <span class="badge bg-light text-dark me-1">CSS3</span>
+                                            <span class="badge bg-light text-dark">Bootstrap</span>
+                                        </div>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-custom">
+                                            <i class="fas fa-cart-plus me-1"></i> Comprar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Style card 3 -->
+                        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="style-card retro-card h-100">
+                                <div class="position-relative">
+                                    <div class="style-preview bg-dark p-3">
+                                        <div class="category-badge">Componentes</div>
+                                        <div class="preview-controls">
+                                            <button class="preview-btn" data-bs-toggle="modal" data-bs-target="#previewModal" data-style-id="3">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="preview-btn">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h4 class="mb-0">UI Kit Pro</h4>
+                                        <span class="price-tag">$39</span>
+                                    </div>
+                                    <p class="text-muted mb-3">Colección de 50+ componentes de UI modernos y reutilizables para cualquier proyecto.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <span class="badge bg-light text-dark me-1">HTML5</span>
+                                            <span class="badge bg-light text-dark me-1">CSS3</span>
+                                            <span class="badge bg-light text-dark">Flexbox</span>
+                                        </div>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-custom">
+                                            <i class="fas fa-cart-plus me-1"></i> Comprar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Style card 4 -->
+                        <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                            <div class="style-card retro-card h-100">
+                                <div class="position-relative">
+                                    <div class="style-preview bg-info p-3">
+                                        <div class="category-badge">Animaciones</div>
+                                        <div class="preview-controls">
+                                            <button class="preview-btn" data-bs-toggle="modal" data-bs-target="#previewModal" data-style-id="4">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="preview-btn">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h4 class="mb-0">Motion Pack</h4>
+                                        <span class="price-tag">$29</span>
+                                    </div>
+                                    <p class="text-muted mb-3">Pack de animaciones CSS para dar vida a tus proyectos web con transiciones fluidas.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <span class="badge bg-light text-dark me-1">CSS3</span>
+                                            <span class="badge bg-light text-dark me-1">Keyframes</span>
+                                            <span class="badge bg-light text-dark">Animations</span>
+                                        </div>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-custom">
+                                            <i class="fas fa-cart-plus me-1"></i> Comprar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Style card 5 -->
+                        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="style-card retro-card h-100">
+                                <div class="position-relative">
+                                    <div class="style-preview bg-warning p-3">
+                                        <div class="category-badge">Landing Page</div>
+                                        <div class="preview-controls">
+                                            <button class="preview-btn" data-bs-toggle="modal" data-bs-target="#previewModal" data-style-id="5">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="preview-btn">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h4 class="mb-0">Startup X</h4>
+                                        <span class="price-tag">$59</span>
+                                    </div>
+                                    <p class="text-muted mb-3">Landing page para startups, SaaS y aplicaciones con secciones modulares.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <span class="badge bg-light text-dark me-1">HTML5</span>
+                                            <span class="badge bg-light text-dark me-1">CSS3</span>
+                                            <span class="badge bg-light text-dark">Grid</span>
+                                        </div>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-custom">
+                                            <i class="fas fa-cart-plus me-1"></i> Comprar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Style card 6 -->
+                        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="style-card retro-card h-100">
+                                <div class="position-relative">
+                                    <div class="style-preview bg-success p-3">
+                                        <div class="category-badge">E-commerce</div>
+                                        <div class="preview-controls">
+                                            <button class="preview-btn" data-bs-toggle="modal" data-bs-target="#previewModal" data-style-id="6">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="preview-btn">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h4 class="mb-0">E-commerce Kit</h4>
+                                        <span class="price-tag">$89</span>
+                                    </div>
+                                    <p class="text-muted mb-3">Kit completo de componentes para e-commerce: catálogos, fichas de producto, checkout.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <span class="badge bg-light text-dark me-1">HTML5</span>
+                                            <span class="badge bg-light text-dark me-1">CSS3</span>
+                                            <span class="badge bg-light text-dark">Responsive</span>
+                                        </div>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-custom">
+                                            <i class="fas fa-cart-plus me-1"></i> Comprar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other tabs content (placeholder) -->
+                <div class="tab-pane fade" id="landing" role="tabpanel">
+                    <div class="text-center py-5">
+                        <span class="loader"></span>
+                        <p class="mt-3">Cargando estilos de Landing Pages...</p>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="ecommerce" role="tabpanel">
+                    <div class="text-center py-5">
+                        <span class="loader"></span>
+                        <p class="mt-3">Cargando estilos de E-commerce...</p>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="components" role="tabpanel">
+                    <div class="text-center py-5">
+                        <span class="loader"></span>
+                        <p class="mt-3">Cargando componentes...</p>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="animations" role="tabpanel">
+                    <div class="text-center py-5">
+                        <span class="loader"></span>
+                        <p class="mt-3">Cargando animaciones...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5" data-aos="fade-up">
+                <a href="javascript:void(0)" class="btn btn-lg btn-custom">
+                    <i class="fas fa-th-large me-2"></i>Ver todos los estilos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories section -->
+    <section id="categories" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="h1 fw-bold mb-3">Explora por categorías</h2>
+                <p class="lead text-muted mx-auto" style="max-width: 700px;">Encuentra exactamente lo que necesitas para tu próximo proyecto web navegando por nuestras categorías especializadas.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="retro-card h-100 p-4 text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h3 class="h4 mb-3">Landing Pages</h3>
+                        <p class="text-muted mb-4">Diseños de páginas de aterrizaje optimizados para conversiones y presentar tu producto o servicio.</p>
+                        <a href="javascript:void(0)" class="btn btn-outline-custom">
+                            <i class="fas fa-arrow-right me-1"></i> Explorar
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="retro-card h-100 p-4 text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3 class="h4 mb-3">E-commerce</h3>
+                        <p class="text-muted mb-4">Plantillas para tiendas online con catálogos, páginas de producto y procesos de compra optimizados.</p>
+                        <a href="javascript:void(0)" class="btn btn-outline-custom">
+                            <i class="fas fa-arrow-right me-1"></i> Explorar
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="retro-card h-100 p-4 text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-th-large"></i>
+                        </div>
+                        <h3 class="h4 mb-3">Componentes UI</h3>
+                        <p class="text-muted mb-4">Colecciones de componentes de interfaz de usuario reutilizables para construir cualquier tipo de sitio web.</p>
+                        <a href="javascript:void(0)" class="btn btn-outline-custom">
+                            <i class="fas fa-arrow-right me-1"></i> Explorar
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="retro-card h-100 p-4 text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                        <h3 class="h4 mb-3">Animaciones</h3>
+                        <p class="text-muted mb-4">Efectos visuales y animaciones CSS para dar vida a tus sitios web y mejorar la experiencia de usuario.</p>
+                        <a href="javascript:void(0)" class="btn btn-outline-custom">
+                            <i class="fas fa-arrow-right me-1"></i> Explorar
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="retro-card h-100 p-4 text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="h4 mb-3">Responsive</h3>
+                        <p class="text-muted mb-4">Diseños que se adaptan perfectamente a todos los dispositivos: móviles, tablets y escritorio.</p>
+                        <a href="javascript:void(0)" class="btn btn-outline-custom">
+                            <i class="fas fa-arrow-right me-1"></i> Explorar
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="retro-card h-100 p-4 text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3 class="h4 mb-3">Temas y Estilos</h3>
+                        <p class="text-muted mb-4">Sistemas de diseño completos con paletas de colores, tipografías y elementos consistentes.</p>
+                        <a href="javascript:void(0)" class="btn btn-outline-custom">
+                            <i class="fas fa-arrow-right me-1"></i> Explorar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works section -->
+    <section id="how-it-works" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="h1 fw-bold mb-3">Cómo funciona</h2>
+                <p class="lead text-muted mx-auto" style="max-width: 700px;">Conseguir el estilo perfecto para tu proyecto web es más fácil de lo que piensas. Sigue estos sencillos pasos.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="retro-card p-4 h-100">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="display-4 fw-bold text-primary me-3">1</div>
+                            <h3 class="h4 mb-0">Explora y prueba</h3>
+                        </div>
+                        <p class="text-muted">Navega por nuestra colección de estilos y utiliza la función de vista previa para ver cómo funcionaría en tu proyecto.</p>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" width="40" class="mt-3">
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="retro-card p-4 h-100">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="display-4 fw-bold text-primary me-3">2</div>
+                            <h3 class="h4 mb-0">Compra y descarga</h3>
+                        </div>
+                        <p class="text-muted">Una vez que encuentres el estilo perfecto, realiza la compra segura y descarga los archivos inmediatamente.</p>
+                        <i class="fas fa-download text-primary mt-3" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="retro-card p-4 h-100">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="display-4 fw-bold text-primary me-3">3</div>
+                            <h3 class="h4 mb-0">Personaliza y usa</h3>
+                        </div>
+                        <p class="text-muted">Integra el código en tu proyecto y personalízalo según tus necesidades. ¡Todo listo para impresionar!</p>
+                        <i class="fas fa-code text-primary mt-3" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5" data-aos="fade-up">
+                <a href="#styles" class="btn btn-lg btn-custom">
+                    <i class="fas fa-palette me-2"></i>Comenzar ahora
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials section -->
+    <section id="testimonials" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="h1 fw-bold mb-3">Lo que dicen nuestros clientes</h2>
+                <p class="lead text-muted mx-auto" style="max-width: 700px;">Descubre por qué desarrolladores y diseñadores web confían en nuestros productos para sus proyectos.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                    <div class="testimonial retro-card h-100">
+                        <div class="mb-4">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="fst-italic mb-4">"Los estilos que compré me ahorraron semanas de trabajo. El código está impecable y la documentación es excelente. Sin duda volveré a comprar."</p>
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                <span class="fw-bold">MR</span>
+                            </div>
+                            <div>
+                                <h5 class="mb-1">Miguel Rodríguez</h5>
+                                <p class="text-muted small mb-0">Frontend Developer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial retro-card h-100">
+                        <div class="mb-4">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="fst-italic mb-4">"Como diseñadora, encontré exactamente lo que necesitaba para un proyecto con deadline ajustado. La calidad y facilidad de personalización son impresionantes."</p>
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                <span class="fw-bold">LS</span>
+                            </div>
+                            <div>
+                                <h5 class="mb-1">Laura Sánchez</h5>
+                                <p class="text-muted small mb-0">UI/UX Designer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial retro-card h-100">
+                        <div class="mb-4">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star-half-alt text-warning"></i>
+                        </div>
+                        <p class="fst-italic mb-4">"He comprado varios paquetes de componentes y todos han sido excelentes. El soporte es rápido y eficiente cuando he tenido alguna duda. Totalmente recomendado."</p>
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                <span class="fw-bold">CG</span>
+                            </div>
+                            <div>
+                                <h5 class="mb-1">Carlos González</h5>
+                                <p class="text-muted small mb-0">Web Developer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+                    <h2 class="h1 fw-bold mb-4">¿Tienes alguna pregunta?</h2>
+                    <p class="lead mb-4">Estamos aquí para ayudarte con cualquier duda sobre nuestros productos o servicios. Rellena el formulario y te responderemos lo antes posible.</p>
+                    
+                    <div class="mb-4">
+                        <h4>Información de contacto</h4>
+                        <p><i class="fas fa-envelope text-primary me-2"></i> info@stylemarket.com</p>
+                        <p><i class="fas fa-phone text-primary me-2"></i> +34 123 456 789</p>
+                        <p><i class="fas fa-map-marker-alt text-primary me-2"></i> Calle Principal 123, Madrid, España</p>
+                    </div>
+                    
+                    <h4>Síguenos</h4>
+                    <div class="d-flex gap-3 mt-3">
+                        <a href="javascript:void(0)" class="btn btn-outline-primary rounded-circle">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="btn btn-outline-primary rounded-circle">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="btn btn-outline-primary rounded-circle">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="btn btn-outline-primary rounded-circle">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="retro-card p-4">
+                        <h3 class="mb-4">Envíanos un mensaje</h3>
+                        <form id="contactForm">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="name" placeholder="Tu nombre" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="tu@email.com" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Asunto</label>
+                                <input type="text" class="form-control" id="subject" placeholder="Asunto del mensaje" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Mensaje</label>
+                                <textarea class="form-control" id="message" rows="4" placeholder="Tu mensaje..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-custom">
+                                <i class="fas fa-paper-plane me-2"></i>Enviar mensaje
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="text-white mb-4">StyleMarket</h5>
+                    <p class="text-white-50">Proporcionamos diseños web de alta calidad para proyectos de cualquier tamaño. Nuestros productos son fáciles de personalizar y usar.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="javascript:void(0)" class="text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="text-white">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-white mb-4">Productos</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="javascript:void(0)" class="text-white-50">Landing Pages</a></li>
+                        <li class="mb-2"><a href="javascript:void(0)" class="text-white-50">E-commerce</a></li>
+                        <li class="mb-2"><a href="javascript:void(0)" class="text-white-50">Componentes UI</a></li>
+                        <li class="mb-2"><a href="javascript:void(0)" class="text-white-50">Animaciones</a></li>
+                        <li class="mb-2"><a href="javascript:void(0)" class="text-white-50">Temas completos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-white mb-4">Recursos</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="javascript:void(0)" class="text-white-50">Documentación</a></li>
+                        <li class="mb-2"><a href="javascript:void(0)" class="text-white-50">Tutoriales</a></li>
+                        <li class="mb-2"><a href="javascript:void(0)" class="text-white-50">Blog</a></li>
+                        <li class="mb-2"><a href="javascript:void(0)" class="text-white-50">Guías</a></li>
+                        <li class="mb-2"><a href="javascript:void(0)" class="text-white-50">Soporte</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5 class="text-white mb-4">Suscríbete</h5>
+                    <p class="text-white-50">Recibe noticias, ofertas y nuevos lanzamientos directamente en tu bandeja de entrada.</p>
+                    <div class="input-group mt-3">
+                        <input type="email" class="form-control" placeholder="Tu email" aria-label="Email" aria-describedby="subscribe-button">
+                        <button class="btn btn-custom" type="button" id="subscribe-button">Suscribirse</button>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4 bg-white-50">
+            
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-white-50 mb-0">&copy; 2025 StyleMarket. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="javascript:void(0)" class="text-white-50">Términos</a></li>
+                        <li class="list-inline-item"><span class="text-white-50 mx-1">·</span></li>
+                        <li class="list-inline-item"><a href="javascript:void(0)" class="text-white-50">Privacidad</a></li>
+                        <li class="list-inline-item"><span class="text-white-50 mx-1">·</span></li>
+                        <li class="list-inline-item"><a href="javascript:void(0)" class="text-white-50">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Live Preview Modal -->
+    <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="previewModalLabel">Vista previa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <ul class="nav nav-pills" id="previewTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="desktop-tab" data-bs-toggle="pill" data-bs-target="#desktop" type="button" role="tab">
+                                    <i class="fas fa-desktop me-1"></i> Escritorio
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="tablet-tab" data-bs-toggle="pill" data-bs-target="#tablet" type="button" role="tab">
+                                    <i class="fas fa-tablet-alt me-1"></i> Tablet
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="mobile-tab" data-bs-toggle="pill" data-bs-target="#mobile" type="button" role="tab">
+                                    <i class="fas fa-mobile-alt me-1"></i> Móvil
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tab-content" id="previewTabContent">
+                        <div class="tab-pane fade show active" id="desktop" role="tabpanel">
+                            <iframe id="livePreviewFrame" src="about:blank"></iframe>
+                        </div>
+                        <div class="tab-pane fade" id="tablet" role="tabpanel">
+                            <div class="d-flex justify-content-center">
+                                <iframe id="tabletPreviewFrame" src="about:blank" style="width: 768px; height: 500px; border: 2px solid var(--dark); border-radius: var(--border-radius); box-shadow: 4px 4px 0 var(--dark);"></iframe>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="mobile" role="tabpanel">
+                            <div class="d-flex justify-content-center">
+                                <iframe id="mobilePreviewFrame" src="about:blank" style="width: 375px; height: 667px; border: 2px solid var(--dark); border-radius: var(--border-radius); box-shadow: 4px 4px 0 var(--dark);"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-custom" id="addToCartBtn">
+                        <i class="fas fa-cart-plus me-1"></i> Añadir al carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script id="app-script">
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if(this.getAttribute('href') !== '#') {
+                        document.querySelector(this.getAttribute('href')).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Preview modal functionality
+            const previewModal = document.getElementById('previewModal');
+            if (previewModal) {
+                previewModal.addEventListener('show.bs.modal', function (event) {
+                    const button = event.relatedTarget;
+                    const styleId = button.getAttribute('data-style-id');
+                    
+                    const livePreviewFrame = document.getElementById('livePreviewFrame');
+                    const tabletPreviewFrame = document.getElementById('tabletPreviewFrame');
+                    const mobilePreviewFrame = document.getElementById('mobilePreviewFrame');
+                    
+                    // Demo content for iframe - would be replaced with actual style preview
+                    const mockupContent = `
+                        <!DOCTYPE html>
+                        <html>
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Preview</title>
+                            <style>
+                                body {
+                                    font-family: 'Inter', sans-serif;
+                                    padding: 20px;
+                                    margin: 0;
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: center;
+                                    justify-content: center;
+                                    min-height: 100vh;
+                                    background-color: ${styleId === '1' ? '#6366f1' : 
+                                                        styleId === '2' ? '#f43f5e' : 
+                                                        styleId === '3' ? '#1e293b' : 
+                                                        styleId === '4' ? '#0dcaf0' : 
+                                                        styleId === '5' ? '#ffc107' : 
+                                                        '#198754'};
+                                    color: white;
+                                    text-align: center;
+                                }
+                                .preview-content {
+                                    max-width: 800px;
+                                }
+                                .preview-title {
+                                    font-size: 2.5rem;
+                                    margin-bottom: 1rem;
+                                }
+                                .preview-description {
+                                    font-size: 1.2rem;
+                                    margin-bottom: 2rem;
+                                }
+                                .preview-button {
+                                    background: white;
+                                    color: #333;
+                                    border: none;
+                                    padding: 10px 20px;
+                                    border-radius: 30px;
+                                    font-weight: bold;
+                                    cursor: pointer;
+                                    transition: transform 0.2s;
+                                }
+                                .preview-button:hover {
+                                    transform: scale(1.05);
+                                }
+                                .style-name {
+                                    position: absolute;
+                                    top: 20px;
+                                    left: 20px;
+                                    background: rgba(0,0,0,0.3);
+                                    padding: 5px 15px;
+                                    border-radius: 30px;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            <div class="style-name">Estilo #${styleId}</div>
+                            <div class="preview-content">
+                                <h1 class="preview-title">Vista previa del estilo</h1>
+                                <p class="preview-description">Esta es una vista previa del estilo seleccionado. En una implementación real, verías el diseño completo con todas sus características.</p>
+                                <button class="preview-button">Botón de ejemplo</button>
+                            </div>
+                        </body>
+                        </html>
+                    `;
+                    
+                    livePreviewFrame.srcdoc = mockupContent;
+                    tabletPreviewFrame.srcdoc = mockupContent;
+                    mobilePreviewFrame.srcdoc = mockupContent;
+                    
+                    // Update modal title based on the style
+                    const styleNames = {
+                        '1': 'Moderna Pro',
+                        '2': 'ShopStyle',
+                        '3': 'UI Kit Pro',
+                        '4': 'Motion Pack',
+                        '5': 'Startup X',
+                        '6': 'E-commerce Kit'
+                    };
+                    
+                    const modalTitle = previewModal.querySelector('.modal-title');
+                    modalTitle.textContent = `Vista previa - ${styleNames[styleId] || 'Estilo'}`;
+                });
+            }
+
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if(contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Simulate form submission
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Enviando...';
+                    
+                    // Simulate API call
+                    setTimeout(() => {
+                        alert('¡Gracias por tu mensaje! Te responderemos lo antes posible.');
+                        contactForm.reset();
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
+                    }, 1500);
+                });
+            }
+
+            // Add to cart functionality
+            const addToCartBtn = document.getElementById('addToCartBtn');
+            if(addToCartBtn) {
+                addToCartBtn.addEventListener('click', function() {
+                    const originalText = addToCartBtn.innerHTML;
+                    
+                    addToCartBtn.disabled = true;
+                    addToCartBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Añadiendo...';
+                    
+                    // Simulate API call
+                    setTimeout(() => {
+                        alert('¡Producto añadido al carrito!');
+                        
+                        // Close modal
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('previewModal'));
+                        modal.hide();
+                        
+                        // Reset button
+                        addToCartBtn.disabled = false;
+                        addToCartBtn.innerHTML = originalText;
+                    }, 1000);
+                });
+            }
+
+            // Tabs functionality - simulate loading content
+            document.querySelectorAll('#stylesTab button[data-bs-toggle="pill"]').forEach(function(tabEl) {
+                tabEl.addEventListener('shown.bs.tab', function(event) {
+                    // If it's not the "all" tab, simulate loading content
+                    if(event.target.id !== 'all-tab') {
+                        const targetTabId = event.target.getAttribute('data-bs-target').substring(1);
+                        const targetTab = document.getElementById(targetTabId);
+                        
+                        // After 1.5s, replace the loader with content
+                        setTimeout(function() {
+                            targetTab.innerHTML = document.getElementById('all').innerHTML;
+                        }, 1500);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
